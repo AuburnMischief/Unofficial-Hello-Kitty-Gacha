@@ -1,0 +1,11 @@
+DIFFERENT CRATES DO NOT HAVE DIFFERENT VARIENT CHANCES
+
+Basic Crate
+- 50% Plushie
+- 30% Hotwheels Car
+- 20% Pasta
+
+Medium Crate
+- 30% Plushie
+- 30% Hotwheels Car
+- 40% Pasta

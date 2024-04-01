@@ -206,6 +206,21 @@ if /i "%choice%"=="1" (
 ) else if /i "%choice%"=="6" (
 	echo Gudetama Items
 	call :list Gitems
+) else if /i "%choice%"=="7" (
+	echo All Items
+	echo Hello Kitty Items
+	call :list HKitems
+	echo My Melody Items
+	call :list MMtems
+	echo Little Twin Stars Items
+	call :list LTStems
+	echo Pompompurin Items
+	call :list Pitems
+	echo Cinnamoroll Items
+	call :list Citems
+	echo Gudetama Items
+	call :list Gitems
+
 ) else if /i "%choice%"=="X" (
 	goto :loop
 ) else (
@@ -264,6 +279,7 @@ if /i "%choice%"=="B" (
 	for /l %%a in (1,1, !choice!) do (
 		call :opencrate basic
 	)
+	echo ----
 ) else if /i "%choice%"=="M" (
 	echo How many MEDIUM crates do you want to open?
 	set /p choice=""
@@ -282,6 +298,7 @@ if /i "%choice%"=="B" (
 	for /l %%a in (1,1, !choice!) do (
 		call :opencrate medium
 	)
+	echo ----
 	goto :crainventory
 ) else if /i "%choice%"=="S" (
 	echo Saving...
@@ -309,14 +326,12 @@ if !random_num! lss 7 (
 	call :colorText 0d "My Melody Variant"
 ) else if !random_num! lss 16 (
 	set variant=LTSitems
-	echo Little Twin Sisters Varient
 	call :colorText 0a "Little Twin Sisters Variant"
 ) else if !random_num! lss 19 (
 	set variant=Pitems
 	call :colorText 0c "Pompompurin Variant"
 ) else if !random_num! lss 21 (
 	set variant=Citems
-	echo Cinnamoroll Varient
 	call :colorText 0b "Cinnamoroll Varient"
 ) else (
 	set variant=Gitems
@@ -339,7 +354,7 @@ if "%1"=="basic" (
 		echo Pasta
     )
 
-) else if %1=="medium" (
+)else if "%1"=="medium" (
 	set /a mcrates-=1
     set /a "random_num2=!random! %% 101"
 
@@ -353,9 +368,8 @@ if "%1"=="basic" (
     ) else if !random_num2! leq 100 (
         call :increase 3 !variant!
 		echo Pasta
-)
-
-echo ---
+    )
+)	
 call :save
 
 goto :eof
@@ -374,7 +388,6 @@ for %%a in (!%2!) do (
 )
 set %2=!list-tmp!
 goto :eof
-
 
 
 
