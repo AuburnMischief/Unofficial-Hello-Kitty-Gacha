@@ -8,14 +8,47 @@ for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1)
 set points=0
 set bcrates=0
 set mcrates=0
+set streak=0
 
-set HKitems=0 0 0
-set MMitems=0 0 0
-set LTSitems=0 0 0
-set Pitems=0 0 0
-set Citems=0 0 0
-set Gitems=0 0 0
-set NameItems="Plushie" "Hotwheels Car" "Pasta"
+
+set HKitems=0 0 0 0 0 0
+set MMitems=0 0 0 0 0 0
+set LTSitems=0 0 0 0 0 0
+set Pitems=0 0 0 0 0 0
+set Citems=0 0 0 0 0 0
+set Gitems=0 0 0 0 0 0
+set NameItems="Plushie" "Hotwheels Car" "Pasta" "Poptart" "Gameboy" "Power Strip"
+
+echo  __          ________ _      _____ ____  __  __ ______   _______ ____  
+echo  \ \        / /  ____^| ^|    / ____/ __ \^|  \/  ^|  ____^| ^|__   __/ __ \ 
+echo   \ \  /\  / /^| ^|__  ^| ^|   ^| ^|   ^| ^|  ^| ^| \  / ^| ^|__       ^| ^| ^| ^|  ^| ^|
+echo    \ \/  \/ / ^|  __^| ^| ^|   ^| ^|   ^| ^|  ^| ^| ^|\/^| ^|  __^|      ^| ^| ^| ^|  ^| ^|
+echo     \  /\  /  ^| ^|____^| ^|___^| ^|___^| ^|__^| ^| ^|  ^| ^| ^|____     ^| ^| ^| ^|__^| ^|
+echo      \/  \/   ^|______^|______\_____\____/^|_^|  ^|_^|______^|    ^|_^|  \____/ 
+echo -
+echo  _    _ _   _  ____  ______ ______ _____ _____ _____          _      
+echo  ^| ^|  ^| ^| \ ^| ^|/ __ \^|  ____^|  ____^|_   _/ ____^|_   _^|   /\   ^| ^|     
+echo  ^| ^|  ^| ^|  \^| ^| ^|  ^| ^| ^|__  ^| ^|__    ^| ^|^| ^|      ^| ^|    /  \  ^| ^|     
+echo  ^| ^|  ^| ^| . ` ^| ^|  ^| ^|  __^| ^|  __^|   ^| ^|^| ^|      ^| ^|   / /\ \ ^| ^|     
+echo  ^| ^|__^| ^| ^|\  ^| ^|__^| ^| ^|    ^| ^|     _^| ^|^| ^|____ _^| ^|_ / ____ \^| ^|____ 
+echo   \____/^|_^| \_^|\____/^|_^|    ^|_^|    ^|_____\_____^|_____/_/    \_\______^|
+echo -                                                                     
+echo   _    _ ______ _      _      ____    _  _______ _______ _________     __
+echo  ^| ^|  ^| ^|  ____^| ^|    ^| ^|    / __ \  ^| ^|/ /_   _^|__   __^|__   __\ \   / /
+echo  ^| ^|__^| ^| ^|__  ^| ^|    ^| ^|   ^| ^|  ^| ^| ^| ' /  ^| ^|    ^| ^|     ^| ^|   \ \_/ / 
+echo  ^|  __  ^|  __^| ^| ^|    ^| ^|   ^| ^|  ^| ^| ^|  ^<   ^| ^|    ^| ^|     ^| ^|    \   /  
+echo  ^| ^|  ^| ^| ^|____^| ^|____^| ^|___^| ^|__^| ^| ^| . \ _^| ^|_   ^| ^|     ^| ^|     ^| ^|   
+echo  ^|_^|  ^|_^|______^|______^|______\____/  ^|_^|\_\_____^|  ^|_^|     ^|_^|     ^|_^|   
+echo -                                                                       
+echo    _____          _____ _    _          
+echo   / ____^|   /\   / ____^| ^|  ^| ^|   /\    
+echo  ^| ^|  __   /  \ ^| ^|    ^| ^|__^| ^|  /  \   
+echo  ^| ^| ^|_ ^| / /\ \^| ^|    ^|  __  ^| / /\ \  
+echo  ^| ^|__^| ^|/ ____ \ ^|____^| ^|  ^| ^|/ ____ \ 
+echo   \_____/_/    \_\_____^|_^|  ^|_/_/    \_\
+echo -----                                
+echo v1.1.0
+
 goto :load
 
 :: FUNCTIONS
@@ -35,20 +68,34 @@ goto :eof
 :work
 
 for /l %%i in (1, 1, 5) do (
-	echo Round %%i/5
+    echo ---
+    echo Round %%i/5
     set /a "num=!random! %% 9000 + 1000"
-	echo "Please type this to work: !num!"
-	set /p playerwork=""
-	
-	if !playerwork! == !num! (
-		echo Correct!
-		set /a points = points+1
-	) else (
-		echo Incorrect!
-	)
-	
+    echo "Please type this to work: !num!"
+    set /p playerwork=""
+
+    if !playerwork! equ !num! (
+        echo Correct!
+        set /a streak+=1
+        if !streak! LEQ 5 (
+            set /a points+=1
+        ) else if !streak! LEQ 10 (
+            set /a points+=2
+        ) else if !streak! LEQ 20 (
+            set /a points+=3
+        ) else if !streak! LEQ 35 (
+            set /a points+=4
+        ) else (
+            set /a points+=5
+        )
+    ) else (
+        echo Incorrect!
+        set streak=0
+    )
+	echo Streak: !streak!
+    echo Current Points: !points!
 )
-echo Work finished!
+
 call :save
 goto :loop
 
@@ -73,6 +120,13 @@ set /p filename="Please enter the file name of your save data (without .lop) or 
 if /i "%filename%"=="N" (
 	set /p filename="Please enter the name for your new save. DO NOT INCLUDE ANY SPACES : "
 	echo "">"!filename!".lop
+	echo -----
+	echo How to play:
+	echo 1. Work to earn points. Get more rounds correct in a row to earn more points.
+	echo 2. Purchase crates in the shop.
+	echo 3. Open crates to earn gachas in your inventory.
+	echo 4. View all your current gachas in your inventory.
+	pause
 ) else (
 	(
 	set /p points=
@@ -87,11 +141,25 @@ if /i "%filename%"=="N" (
 	)<"!filename!".lop
 )
 
+set count=0
+for %%a in (%HKitems%) do (
+    set /a count+=1
+)
+if %count% NEQ 6 (
+    set HKitems=%HKitems% 0 0 0
+    set MMitems=%MMitems% 0 0 0
+    set LTSitems=%LTSitems% 0 0 0
+    set Pitems=%Pitems% 0 0 0
+    set Citems=%Citems% 0 0 0
+    set Gitems=%Gitems% 0 0 0
+)
+
 goto :loop
 :: ------------------------------------------------------------------------------------------
 :: SHOP
 
 :shop
+echo -----
 echo Welcome to the shop!
 goto :shoploop
 	
@@ -163,7 +231,7 @@ goto :shoploop
 :: ------------------------------------------------------------------------------------------
 :: Inventory
 :inventory
-
+echo -----
 echo Press: & echo [C] to enter the crate inventory & echo [G] to enter the gatcha inventory  &echo [S] to save & echo [X] to go back
 set /p choice=""
 
@@ -185,8 +253,8 @@ if /i "%choice%"=="C" (
 goto :inventory
 
 :gatinventory
-
-echo Press: & echo [1] To view Hello Kitty items & echo [2] To view My Melody items &echo [3] To view Little Twin Stars items &echo [4] To view Pompompurin items &echo [5] To view Cinnamoroll items &echo [6] To view Gudetama &echo [7] To view all & echo [X] to go back
+echo -----
+echo Press: & echo [1] To view Hello Kitty items & echo [2] To view My Melody items &echo [3] To view Little Twin Stars items &echo [4] To view Pompompurin items &echo [5] To view Cinnamoroll items &echo [6] To view Gudetama &echo [X] to go back
 set /p choice=""
 if /i "%choice%"=="1" (
 	echo Hello Kitty Items
@@ -206,23 +274,8 @@ if /i "%choice%"=="1" (
 ) else if /i "%choice%"=="6" (
 	echo Gudetama Items
 	call :list Gitems
-) else if /i "%choice%"=="7" (
-	echo All Items
-	echo Hello Kitty Items
-	call :list HKitems
-	echo My Melody Items
-	call :list MMtems
-	echo Little Twin Stars Items
-	call :list LTStems
-	echo Pompompurin Items
-	call :list Pitems
-	echo Cinnamoroll Items
-	call :list Citems
-	echo Gudetama Items
-	call :list Gitems
-
 ) else if /i "%choice%"=="X" (
-	goto :loop
+	goto :inventory
 ) else (
     echo That is not an option!
 )
@@ -230,23 +283,24 @@ if /i "%choice%"=="1" (
 goto :gatinventory
 
 :list
-for /l %%a in (1, 1, 3) do (
-	set count=0
-	for %%c in (%NameItems%) do (
-		set /a count+=1 
-		if %%a == !count! (
-			set itemname=%%c
-		)
-	)
-	set currentItem=%%b
-	set count=0
-	for %%c in (!%1!) do (
-		set /a count+=1 
-		if %%a == !count! (
-			set found=%%c
-		)
-	)
-    echo %%a. !itemname!: !found!    
+set %%a = 0
+for /l %%a in (1, 1, 6) do (
+    set count=0
+    for %%c in (%NameItems%) do (
+        set /a count+=1 
+        if %%a == !count! (
+            set "itemname=%%c"
+        )
+    )
+    set "currentItem=%%b"
+    set count=0
+    for %%c in (!%1!) do (
+        set /a count+=1 
+        if %%a == !count! (
+            set "found=%%c"
+        )
+    )
+    echo %%a. !itemname!: !found!
 )
 goto :eof
 
@@ -255,6 +309,7 @@ goto :eof
 
 
 :crainventory
+echo -----
 echo "You have %bcrates% BASIC crate(s) and %mcrates% MEDIUM crate(s)"
 
 
@@ -345,31 +400,38 @@ if "%1"=="basic" (
     :: Increase the corresponding number based on the random number
     if !random_num2! leq 50 (
         call :increase 1 !variant!
-		echo Plushie
-    ) else if !random_num2! leq 80 (
+    ) else if !random_num2! leq 75 (
         call :increase 2 !variant!
-		echo Hotwheels Car
-    ) else if !random_num2! leq 100 (
+    ) else if !random_num2! leq 85 (
         call :increase 3 !variant!
-		echo Pasta
-    )
+    ) else if !random_num2! leq 92 (
+        call :increase 4 !variant!
+    ) else if !random_num2! leq 97 (
+        call :increase 5 !variant!
+    ) else if !random_num2! leq 100 (
+        call :increase 6 !variant!
+	)
 
 )else if "%1"=="medium" (
 	set /a mcrates-=1
     set /a "random_num2=!random! %% 101"
 
     :: Increase the corresponding number based on the random number
-    if !random_num2! leq 30 (
+    if !random_num2! leq 10 (
         call :increase 1 !variant!
-		echo Plushie
-    ) else if !random_num2! leq 60 (
+    ) else if !random_num2! leq 25 (
         call :increase 2 !variant!
-		echo Hotwheels Car
-    ) else if !random_num2! leq 100 (
+    ) else if !random_num2! leq 40 (
         call :increase 3 !variant!
-		echo Pasta
-    )
+    ) else if !random_num2! leq 70 (
+        call :increase 4 !variant!
+    ) else if !random_num2! leq 90 (
+        call :increase 5 !variant!
+    ) else if !random_num2! leq 100 (
+        call :increase 6 !variant!
+	)
 )	
+
 call :save
 
 goto :eof
@@ -387,6 +449,14 @@ for %%a in (!%2!) do (
     )
 )
 set %2=!list-tmp!
+
+set count=0
+for %%a in (%NameItems%) do (
+    set /a count+=1
+    if !count! == %1 (
+        echo %%a
+    )
+)
 goto :eof
 
 
@@ -396,6 +466,7 @@ goto :eof
 :: Loop
 
 :loop
+echo -----
 echo You have %points% point(s)
 echo Press: & echo [W] to work & echo [B] to enter the shop  &echo [S] to save & echo [E] to open inventory & echo [X] to exit
 set /p choice=""

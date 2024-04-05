@@ -1,0 +1,33 @@
+DIFFERENT CRATES DO NOT HAVE DIFFERENT VARIENT CHANCES
+
+
+Variant Chance
+- 6/21 Hello Kitty
+- 5/21 My Melody
+- 4/21 Little Twin Sisters
+- 3/21 Pompompurin
+- 2/21 Cinnamoroll
+- 1/21 Gudetama
+
+Basic Crate
+- 50% Plushie
+- 25% Hotwheels Car
+- 10% Pasta
+- 7% Poptart
+- 5% Gameboy
+- 3% Power Strip
+
+Medium Crate
+- 10% Plushie
+- 15% Hotwheels Car
+- 15% Pasta
+- 30% Poptart
+- 20% Gameboy
+- 10% Power Strip
+
+Streak Bonus
+- Streak of 0-4 | +1 Point
+- Streak of 5-10 | +2 Points
+- Streak of 11-20 | +3 Points
+- Streak of 21-35 | +4 Points
+- Streak of 36+ | +5 Points
