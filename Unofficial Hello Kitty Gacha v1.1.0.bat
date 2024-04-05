@@ -17,7 +17,7 @@ set LTSitems=0 0 0 0 0 0
 set Pitems=0 0 0 0 0 0
 set Citems=0 0 0 0 0 0
 set Gitems=0 0 0 0 0 0
-set NameItems="Plushie" "Hotwheels Car" "Pasta" "Poptart" "Gameboy" "Power Strip"
+set NameItems="Plushie" "Hotwheels Car" "Pasta" "Pop-tart" "Gameboy" "Power Strip"
 
 echo  __          ________ _      _____ ____  __  __ ______   _______ ____  
 echo  \ \        / /  ____^| ^|    / ____/ __ \^|  \/  ^|  ____^| ^|__   __/ __ \ 
